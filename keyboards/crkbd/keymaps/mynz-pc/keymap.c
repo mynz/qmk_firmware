@@ -60,6 +60,14 @@ enum macro_keycodes {
 #define KC_ALTMH ALT_T(KC_MHEN)
 #define KC_GUIHN GUI_T(KC_HENK)
 
+#if 0
+#define KC_RAIHN LT(RAISE, KC_HENK)
+#define KC_LOWMH LT(LOWER, KC_MHEN)
+#else
+#define KC_RAIHN RAISE
+#define KC_LOWMH LOWER
+#endif
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
@@ -69,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT,     Z,     X,     C,     V,     B,                      N,     M,  COMM,   DOT,  SLSH,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                   LALT, LOWER,   SPC,      ENT, RAISE,  ZKHK \
+                                   LALT, LOWMH,   SPC,      ENT, RAIHN,  ZKHK \
                               //`--------------------'  `--------------------'
   ),
 
@@ -81,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT,   F11,   F12,   F13,   F14,   F15,                    F16,   F17,   F18,   F19,   F20, XXXXX,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                   LALT, LOWER,   SPC,      TAB, RAISE,  ZKHK \
+                                   LALT, LOWMH,   SPC,      TAB, RAIHN,  ZKHK \
                               //`--------------------'  `--------------------'
   ),
 
@@ -93,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                   UNDS,  PLUS,  LBRC,  RBRC,  BSLS,  TILD,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                   LALT, LOWER,  BSPC,      ENT, RAISE,  ZKHK \
+                                   LALT, LOWMH,  BSPC,      ENT, RAIHN,  ZKHK \
                               //`--------------------'  `--------------------'
   ),
 
@@ -105,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                   LALT, LOWER,   SPC,      ENT, RAISE,  ZKHK \
+                                   LALT, LOWMH,   SPC,      ENT, RAIHN,  ZKHK \
                               //`--------------------'  `--------------------'
   )
 };
