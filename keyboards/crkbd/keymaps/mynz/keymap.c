@@ -58,6 +58,10 @@ enum macro_keycodes {
 #define KC_GUIEI GUI_T(KC_LANG2)
 #define KC_ALTKN ALT_T(KC_LANG1)
 
+#define KC_LOWEI LT(_LOWER, KC_LANG2)
+#define KC_RAIKN LT(_RAISE, KC_LANG1)
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
@@ -67,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT,     Z,     X,     C,     V,     B,                      N,     M,  COMM,   DOT,  SLSH,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  GUIEI, LOWER,   SPC,      ENT, RAISE, ALTKN \
+                                  GUIEI, LOWEI,   SPC,      ENT, RAIKN, ALTKN \
                               //`--------------------'  `--------------------'
   ),
 
@@ -79,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT,   F11,   F12,   F13,   F14,   F15,                    F16,   F17,   F18,   F19,   F20, XXXXX,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  GUIEI, LOWER,   SPC,      TAB, RAISE, ALTKN \
+                                  GUIEI, LOWEI,   SPC,      TAB, RAIKN, ALTKN \
                               //`--------------------'  `--------------------'
   ),
 
@@ -91,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                   UNDS,  PLUS,  LBRC,  RBRC,  BSLS,  TILD,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  GUIEI, LOWER,  BSPC,      ENT, RAISE, ALTKN \
+                                  GUIEI, LOWEI,  BSPC,      ENT, RAIKN, ALTKN \
                               //`--------------------'  `--------------------'
   ),
 
@@ -103,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  GUIEI, LOWER,   SPC,      ENT, RAISE, ALTKN \
+                                  GUIEI, LOWEI,   SPC,      ENT, RAIKN, ALTKN \
                               //`--------------------'  `--------------------'
   )
 };
