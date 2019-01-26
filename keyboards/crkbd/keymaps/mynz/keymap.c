@@ -186,6 +186,11 @@ void iota_gfx_task_user(void) {
 }
 #endif//SSD1306OLED
 
+// _RAISE, _LOWER の同時押しで _ADJUST に切り替える
+uint32_t layer_state_set_user(uint32_t state) {
+  return update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
 #ifdef SSD1306OLED
