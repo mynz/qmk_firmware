@@ -62,12 +62,12 @@ enum macro_keycodes {
 
 #if defined(FOR_WINDOWS)
 #define KC_CMD KC_LALT
-#define KC_OPT KC_RCTL
+#define KC_OPT CTL_T(KC_ESC)
 #define KC_LOWEI LT(_LOWER, KC_MHEN)
 #define KC_RAIKN LT(_RAISE, KC_HENK)
 #else
 #define KC_CMD KC_LGUI
-#define KC_OPT KC_LALT
+#define KC_OPT ALT_T(KC_ESC)
 #define KC_LOWEI LT(_LOWER, KC_LANG2)
 #define KC_RAIKN LT(_RAISE, KC_LANG1)
 #endif
@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT,   F11,   F12,   F13,   F14,   F15,                    F16,   F17,   F18,   F19,   F20, XXXXX,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                    CMD, LOWEI,   SPC,     BSPC, RAIKN,  OPT \
+                                    CMD, LOWEI,   SPC,      DEL, RAIKN,  OPT \
                               //`--------------------'  `--------------------'
   ),
 
