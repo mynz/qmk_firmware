@@ -20,12 +20,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+#if 1
+#define FOR_WINDOWS
+#endif
+
 //#define USE_MATRIX_I2C
 
 /* Select hand configuration */
 
-//#define MASTER_LEFT
+#if defined(FOR_WINDOWS)
+#define MASTER_LEFT
+#else
 #define MASTER_RIGHT
+#endif
+
 // #define EE_HANDS
 
 #define SSD1306OLED
