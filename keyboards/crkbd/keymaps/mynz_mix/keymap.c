@@ -62,12 +62,12 @@ enum macro_keycodes {
 
 #if defined(FOR_WINDOWS)
 #define KC_CMD KC_LALT
-#define KC_OPT CTL_T(KC_ESC)
+#define KC_OPT CTL_T(KC_TAB)
 #define KC_LOWEI LT(_LOWER, KC_MHEN)
 #define KC_RAIKN LT(_RAISE, KC_HENK)
 #else
 #define KC_CMD KC_LGUI
-#define KC_OPT ALT_T(KC_ESC)
+#define KC_OPT ALT_T(KC_TAB)
 #define KC_LOWEI LT(_LOWER, KC_LANG2)
 #define KC_RAIKN LT(_RAISE, KC_LANG1)
 #endif
