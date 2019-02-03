@@ -88,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-        ESC,  EXLM,    AT,  HASH,   DLR,  PERC,                   CIRC,  AMPR,  ASTR,  LPRN,  RPRN,   ESC,\
+        TAB,  EXLM,    AT,  HASH,   DLR,  PERC,                   CIRC,  AMPR,  ASTR,  LPRN,  RPRN,   ESC,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
       CTLES, XXXXX, XXXXX,  LPRN,  RPRN,   GRV,                   MINS,   EQL,  LCBR,  RCBR,  PIPE, XXXXX,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
@@ -112,11 +112,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ADJUST] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-        ESC, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                  XXXXX,  PGDN,  PGUP, XXXXX,   INS,  LGUI,\
+        TAB, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                  XXXXX,  PGDN,  PGUP, XXXXX,   INS,  LGUI,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
       CTLES, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                   LEFT,  DOWN,    UP, RIGHT, XXXXX, XXXXX,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LSFT, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                  XXXXX,   END,  HOME, XXXXX, XXXXX,  RSFT,\
+       LSFT, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                  XXXXX,  HOME,   END, XXXXX, XXXXX,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                     CMD, LOWEI,   SPC,      ENT, RAIKN,  OPT \
                               //`--------------------'  `--------------------'
