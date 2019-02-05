@@ -62,12 +62,12 @@ enum macro_keycodes {
 
 #if defined(FOR_WINDOWS)
 #define KC_CMD KC_LALT
-#define KC_OPT CTL_T(KC_TAB)
+#define KC_OPTTB CTL_T(KC_TAB)
 #define KC_LOWEI LT(_LOWER, KC_MHEN)
 #define KC_RAIKN LT(_RAISE, KC_HENK)
 #else
 #define KC_CMD KC_LGUI
-#define KC_OPT ALT_T(KC_TAB)
+#define KC_OPTTB ALT_T(KC_TAB)
 #define KC_LOWEI LT(_LOWER, KC_LANG2)
 #define KC_RAIKN LT(_RAISE, KC_LANG1)
 #endif
@@ -82,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT,     Z,     X,     C,     V,     B,                      N,     M,  COMM,   DOT,  SLSH,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                    CMD, LOWEI,   SPC,      ENT, RAIKN,  OPT \
+                                    CMD, LOWEI,   SPC,      ENT, RAIKN, OPTTB\
                               //`--------------------'  `--------------------'
   ),
 
@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT, XXXXX, XXXXX,  LBRC,  RBRC,  TILD,                   UNDS,  PLUS,  LBRC,  RBRC,  BSLS,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                    CMD, LOWEI,  BSPC,      DEL, RAIKN,  OPT \
+                                    CMD, LOWEI,  BSPC,      DEL, RAIKN, OPTTB\
                               //`--------------------'  `--------------------'
   ),
 
@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT,    F1,    F2,    F3,    F4,    F5,                     F6,     1,     2,     3,   DOT,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                    CMD, LOWEI,  BSPC,      DEL, RAIKN,  OPT \
+                                    CMD, LOWEI,  BSPC,      DEL, RAIKN, OPTTB\
                               //`--------------------'  `--------------------'
   ),
 
@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                  XXXXX,  HOME,   END, XXXXX, XXXXX,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                    CMD, LOWEI,   SPC,      ENT, RAIKN,  OPT \
+                                    CMD, LOWEI,   SPC,      ENT, RAIKN, OPTTB\
                               //`--------------------'  `--------------------'
   )
 };
