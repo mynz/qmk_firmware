@@ -60,16 +60,18 @@ enum macro_keycodes {
 #define KC_CTLTB CTL_T(KC_TAB)
 #define KC_CTLES CTL_T(KC_ESC)
 
-#if defined(FOR_WINDOWS)
-#define KC_CMD KC_LALT
-#define KC_OPTTB CTL_T(KC_TAB)
-#define KC_LOWEI LT(_LOWER, KC_MHEN)
-#define KC_RAIKN LT(_RAISE, KC_HENK)
-#else
+#if defined(FOR_MAC)
+// for Mac
 #define KC_CMD KC_LGUI
 #define KC_OPTTB ALT_T(KC_TAB)
 #define KC_LOWEI LT(_LOWER, KC_LANG2)
 #define KC_RAIKN LT(_RAISE, KC_LANG1)
+#else
+// for Windows
+#define KC_CMD KC_LALT
+#define KC_OPTTB CTL_T(KC_TAB)
+#define KC_LOWEI LT(_LOWER, KC_MHEN)
+#define KC_RAIKN LT(_RAISE, KC_HENK)
 #endif
 
 
