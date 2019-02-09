@@ -32,7 +32,8 @@ enum custom_keycodes {
   RAISE,
   ADJUST,
   BACKLIT,
-  RGBRST
+  RGBRST,
+  CPPASTE, // my macro
 };
 
 enum macro_keycodes {
@@ -53,6 +54,8 @@ enum macro_keycodes {
 // #define KC_LVAI  RGB_VAI
 // #define KC_LVAD  RGB_VAD
 // #define KC_LMOD  RGB_MOD
+
+#define KC_CPPST  CPPASTE
 
 // #define KC_GUIEI GUI_T(KC_LANG2)
 #define KC_ALTKN ALT_T(KC_LANG1)
@@ -92,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------.                ,-----------------------------------------.
         TAB,  EXLM,    AT,  HASH,   DLR,  PERC,                   CIRC,  AMPR,  ASTR,  LPRN,  RPRN,   DEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      CTLES, XXXXX, XXXXX,  LPRN,  RPRN,   GRV,                    EQL,  MINS,  LCBR,  RCBR,  PIPE, XXXXX,\
+      CTLES, CPPST, XXXXX,  LPRN,  RPRN,   GRV,                    EQL,  MINS,  LCBR,  RCBR,  PIPE, XXXXX,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT, XXXXX, XXXXX,  LBRC,  RBRC,  TILD,                   PLUS,  UNDS,  LBRC,  RBRC,  BSLS,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
@@ -204,6 +207,22 @@ uint32_t layer_state_set_user(uint32_t state) {
   return update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
 }
 
+static void copy_and_paste(bool pressed) {
+#if defined(FOR_MAC)
+	if (pressed) {
+		SEND_STRING(SS_LGUI("c"));
+	} else {
+		SEND_STRING(SS_LGUI("v"));
+	}
+#else
+	if (pressed) {
+		SEND_STRING(SS_LCTRL("c"));
+	} else {
+		SEND_STRING(SS_LCTRL("v"));
+	}
+#endif
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
 #ifdef SSD1306OLED
@@ -266,6 +285,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       #endif
       break;
+	case CPPASTE:
+		copy_and_paste(record->event.pressed);
+		return false;
+	  break;
   }
   return true;
 }
