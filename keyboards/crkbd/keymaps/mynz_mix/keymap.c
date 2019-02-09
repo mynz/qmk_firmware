@@ -33,7 +33,6 @@ enum custom_keycodes {
   ADJUST,
   BACKLIT,
   RGBRST,
-  // CPPASTE, // my macro
   TYUNM, // my macro
 };
 
@@ -56,7 +55,6 @@ enum macro_keycodes {
 // #define KC_LVAD  RGB_VAD
 // #define KC_LMOD  RGB_MOD
 
-#define KC_CPPST  CPPASTE
 #define KC_TYUNM  TYUNM
 
 // #define KC_GUIEI GUI_T(KC_LANG2)
@@ -209,24 +207,6 @@ uint32_t layer_state_set_user(uint32_t state) {
   return update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
 }
 
-#if 0
-static void copy_and_paste(bool pressed) {
-#if defined(FOR_MAC)
-	if (pressed) {
-		SEND_STRING(SS_LGUI("c"));
-	} else {
-		SEND_STRING(SS_LGUI("v"));
-	}
-#else
-	if (pressed) {
-		SEND_STRING(SS_LCTRL("c"));
-	} else {
-		SEND_STRING(SS_LCTRL("v"));
-	}
-#endif
-}
-#endif
-
 static void type_username(bool pressed) {
 	if (pressed) {
 		SEND_STRING("morimoto_atsushi");
@@ -295,11 +275,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       #endif
       break;
-#if	0
-	case CPPASTE:
-		copy_and_paste(record->event.pressed);
-		return false;
-#endif
 	case TYUNM:
 		type_username(record->event.pressed);
 		return false;
