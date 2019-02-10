@@ -1,3 +1,8 @@
+/*
+ * tap dance ref: keyboards/planck/keymaps/altgr/common/keycode_functions.h
+ * tap dance ref: keyboards/bpiphany/frosty_flake/keymaps/nikchi/keymap.c
+ */
+
 #include QMK_KEYBOARD_H
 #include "bootloader.h"
 #ifdef PROTOCOL_LUFA
@@ -40,6 +45,46 @@ enum macro_keycodes {
   KC_SAMPLEMACRO,
 };
 
+enum {
+	TD_LCBR,
+};
+
+static void tap_key(uint16_t keycode, bool shift) {
+	if (shift) {
+		register_code(KC_LSHIFT);
+		register_code(keycode);
+		unregister_code(keycode);
+		unregister_code(KC_LSHIFT);
+	} else {
+		register_code(keycode);
+		unregister_code(keycode);
+	}
+}
+
+static void tap_key_double_max(uint16_t keycode, bool shift, uint8_t count) {
+	tap_key(keycode, shift);
+	if (count > 1) {
+		tap_key(keycode, shift);
+	}
+}
+
+void td_brace_fn(qk_tap_dance_state_t *state, void *user_data) {
+	if (state->count >= 3 ) {
+		tap_key(KC_LBRC, true);
+		tap_key(KC_ENT, false);
+		tap_key(KC_ENT, false);
+		tap_key(KC_RBRC, true);
+		tap_key(KC_UP, false);
+	} else {
+		tap_key_double_max(KC_LBRC, true, state->count);
+	}
+	reset_tap_dance(state);
+}
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+	[TD_LCBR] = ACTION_TAP_DANCE_FN(td_brace_fn),
+};
+
 #define KC______ KC_TRNS
 #define KC_XXXXX KC_NO
 #define KC_LOWER LOWER
@@ -55,7 +100,11 @@ enum macro_keycodes {
 // #define KC_LVAD  RGB_VAD
 // #define KC_LMOD  RGB_MOD
 
+// マクロ: ユーザーネームを印字する
 #define KC_TYUNM  TYUNM
+
+// タップダンス
+#define KC_TLCBR  TD(TD_LCBR)  // '{'
 
 // #define KC_GUIEI GUI_T(KC_LANG2)
 #define KC_ALTKN ALT_T(KC_LANG1)
@@ -95,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------.                ,-----------------------------------------.
         TAB,  EXLM,    AT,  HASH,   DLR,  PERC,                   CIRC,  AMPR,  ASTR,  LPRN,  RPRN,   DEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      CTLES, TYUNM, XXXXX,  LPRN,  RPRN,   GRV,                    EQL,  MINS,  LCBR,  RCBR,  PIPE, XXXXX,\
+      CTLES, TYUNM, XXXXX,  LPRN,  RPRN,   GRV,                    EQL,  MINS, TLCBR,  RCBR,  PIPE, XXXXX,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT, XXXXX, XXXXX,  LBRC,  RBRC,  TILD,                   PLUS,  UNDS,  LBRC,  RBRC,  BSLS,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
