@@ -46,6 +46,7 @@ enum macro_keycodes {
 };
 
 enum {
+	TD_EQL,
 	TD_LCBR,
 };
 
@@ -81,7 +82,19 @@ void td_brace_fn(qk_tap_dance_state_t *state, void *user_data) {
 	reset_tap_dance(state);
 }
 
+void td_eql_fn(qk_tap_dance_state_t *state, void *user_data) {
+	if (state->count >= 3 ) {
+		tap_key(KC_SPC, false);
+		tap_key(KC_EQL, false);
+		tap_key(KC_SPC, false);
+	} else {
+		tap_key_double_max(KC_EQL, false, state->count);
+	}
+	reset_tap_dance(state);
+}
+
 qk_tap_dance_action_t tap_dance_actions[] = {
+	[TD_EQL] = ACTION_TAP_DANCE_FN(td_eql_fn),
 	[TD_LCBR] = ACTION_TAP_DANCE_FN(td_brace_fn),
 };
 
@@ -104,6 +117,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define KC_TYUNM  TYUNM
 
 // タップダンス
+#define KC_TEQL   TD(TD_EQL)   // '='
 #define KC_TLCBR  TD(TD_LCBR)  // '{'
 
 // #define KC_GUIEI GUI_T(KC_LANG2)
@@ -144,7 +158,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------.                ,-----------------------------------------.
         TAB,  EXLM,    AT,  HASH,   DLR,  PERC,                   CIRC,  AMPR,  ASTR,  LPRN,  RPRN,   DEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      CTLES, TYUNM, XXXXX,  LPRN,  RPRN,   GRV,                    EQL,  MINS, TLCBR,  RCBR,  PIPE, XXXXX,\
+      CTLES, TYUNM, XXXXX,  LPRN,  RPRN,   GRV,                   TEQL,  MINS, TLCBR,  RCBR,  PIPE, XXXXX,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT, XXXXX, XXXXX,  LBRC,  RBRC,  TILD,                   PLUS,  UNDS,  LBRC,  RBRC,  BSLS,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
