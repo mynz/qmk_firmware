@@ -45,9 +45,10 @@ enum macro_keycodes {
   KC_SAMPLEMACRO,
 };
 
-enum {
-	TD_EQL,
-	TD_LCBR,
+enum TapDance {
+	TD_EQL,  // =
+	TD_LCBR, // {
+	TD_SCLN, // ;
 };
 
 static void tap_key(uint16_t keycode, bool shift) {
@@ -93,9 +94,21 @@ void td_eql_fn(qk_tap_dance_state_t *state, void *user_data) {
 	reset_tap_dance(state);
 }
 
+void td_scln_fn(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count >= 2 ) {
+        // type `:`
+        tap_key(KC_SCLN, true);
+    } else {
+        // type `;` as like regular key.
+        tap_key(KC_SCLN, false);
+    }
+    reset_tap_dance(state);
+}
+
 qk_tap_dance_action_t tap_dance_actions[] = {
 	[TD_EQL] = ACTION_TAP_DANCE_FN(td_eql_fn),
 	[TD_LCBR] = ACTION_TAP_DANCE_FN(td_brace_fn),
+	[TD_SCLN] = ACTION_TAP_DANCE_FN(td_scln_fn),
 };
 
 #define KC______ KC_TRNS
@@ -116,9 +129,10 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // マクロ: ユーザーネームを印字する
 #define KC_TYUNM  TYUNM
 
-// タップダンス
+// tap dance: タップダンス
 #define KC_TEQL   TD(TD_EQL)   // '='
 #define KC_TLCBR  TD(TD_LCBR)  // '{'
+#define KC_TSCLN  TD(TD_SCLN)  // ':'
 
 // #define KC_GUIEI GUI_T(KC_LANG2)
 #define KC_ALTKN ALT_T(KC_LANG1)
@@ -146,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------.                ,-----------------------------------------.
         TAB,     Q,     W,     E,     R,     T,                      Y,     U,     I,     O,     P,  BSPC,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      CTLES,     A,     S,     D,     F,     G,                      H,     J,     K,     L,  SCLN,  QUOT,\
+      CTLES,     A,     S,     D,     F,     G,                      H,     J,     K,     L, TSCLN,  QUOT,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT,     Z,     X,     C,     V,     B,                      N,     M,  COMM,   DOT,  SLSH,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
