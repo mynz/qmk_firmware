@@ -27,7 +27,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #if defined(FOR_MAC)
 #define MASTER_RIGHT
 #else
-#define MASTER_LEFT
+// #define MASTER_LEFT
+#define MASTER_RIGHT
 #endif
 
 // #define EE_HANDS
