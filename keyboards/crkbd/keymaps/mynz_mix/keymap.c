@@ -38,7 +38,7 @@ enum custom_keycodes {
   ADJUST,
   BACKLIT,
   RGBRST,
-  TYUNM, // my macro
+  MTYUN, // my macro
 };
 
 enum macro_keycodes {
@@ -159,7 +159,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // #define KC_LMOD  RGB_MOD
 
 // マクロ: ユーザーネームを印字する
-#define KC_TYUNM  TYUNM
+#define KC_MTYUN  MTYUN
 
 // tap dance: タップダンス
 #define KC_TEQL   TD(TD_EQL)   // '='
@@ -202,11 +202,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-        TAB,  EXLM,    AT,  HASH,   DLR,  PERC,                   CIRC,  AMPR,  ASTR,  LPRN,  RPRN,   DEL,\
+      MTYUN,  EXLM,    AT,  HASH,   DLR,  PERC,                   CIRC,  AMPR,  ASTR,  LPRN,  RPRN,   DEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      CTLES, TYUNM, XXXXX,  LPRN,  RPRN,   GRV,                   TEQL,  MINS, TLCBR,  RCBR,  PIPE, XXXXX,\
+      XXXXX,    UP, XXXXX,  LPRN,  RPRN,   GRV,                   TEQL,  MINS, TLCBR,  RCBR,  PIPE, XXXXX,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LSFT, XXXXX, XXXXX,  LBRC,  RBRC,  TILD,                   PLUS,  UNDS,  LBRC,  RBRC,  BSLS,  RSFT,\
+       LEFT,  DOWN, RIGHT,  LBRC,  RBRC,  TILD,                   PLUS,  UNDS,  LBRC,  RBRC,  BSLS,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                     CMD, LOWEI,  BSPC,      SPC, RAIKN, OPTTB\
                               //`--------------------'  `--------------------'
@@ -384,7 +384,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       #endif
       break;
-	case TYUNM:
+	case MTYUN:
 		type_username(record->event.pressed);
 		return false;
 	  break;
