@@ -284,6 +284,33 @@ void matrix_scan_user(void) {
    iota_gfx_task();
 
    LEADER_DICTIONARY() {
+       leading = false;
+
+       SEQ_TWO_KEYS(KC_V, KC_R) {
+           // VS: 実行
+           register_code(KC_RCTRL);
+           tap_key(KC_F5, false);
+           unregister_code(KC_RCTRL);
+       }
+       SEQ_TWO_KEYS(KC_V, KC_D) {
+           // VS: デバッグ実行
+           tap_key(KC_F5, false);
+       }
+       SEQ_TWO_KEYS(KC_V, KC_B) {
+           // VS: ビルド
+           tap_key(KC_F7, false);
+       }
+       SEQ_TWO_KEYS(KC_V, KC_K) {
+           // VS: ブレークポイント
+           tap_key(KC_F9, false);
+       }
+       SEQ_TWO_KEYS(KC_V, KC_C) {
+           // VS: コンパイル
+           register_code(KC_RCTRL);
+           tap_key(KC_F7, false);
+           unregister_code(KC_RCTRL);
+       }
+       leader_end();
    }
 }
 
