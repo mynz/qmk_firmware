@@ -202,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-      MTYUN, XXXXX,    AT,  HASH,   DLR,  PERC,                   EXLM,  AMPR,  ASTR,  CIRC, XXXXX,   DEL,\
+      MTYUN,     1,    AT,  HASH,   DLR,  PERC,                   EXLM,  AMPR,  ASTR,  CIRC,     0,   DEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
       XXXXX,    UP, XXXXX, TLCBR,  RCBR,   GRV,                   TEQL,  MINS,  LPRN,  RPRN,  PIPE, XXXXX,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
