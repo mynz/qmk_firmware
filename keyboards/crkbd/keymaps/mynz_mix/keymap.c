@@ -190,7 +190,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-        TAB,     Q,     W,     E,     R,     T,                      Y,     U,     I,     O,     P,  BSPC,\
+        TAB,     Q,     W,     E,     R,     T,                      Y,     U,     I,     O,     P,  LEAD,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
       CTLES,     A,     S,     D,     F,     G,                      H,     J,     K,     L, TSCLN,  QUOT,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
@@ -278,8 +278,13 @@ const char *read_keylogs(void);
 // void set_timelog(void);
 // const char *read_timelog(void);
 
+LEADER_EXTERNS();
+
 void matrix_scan_user(void) {
    iota_gfx_task();
+
+   LEADER_DICTIONARY() {
+   }
 }
 
 void matrix_render_user(struct CharacterMatrix *matrix) {

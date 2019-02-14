@@ -37,7 +37,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define USE_SERIAL_PD2
 
-#define TAPPING_TERM 180
+#define TAPPING_TERM   180
+#define LEADER_TIMEOUT 300
 
 #define TAPPING_FORCE_HOLD
 //#define RETRO_TAPPING
