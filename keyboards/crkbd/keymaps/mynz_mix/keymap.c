@@ -202,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-      MTYUN,     1,    AT,  HASH,   DLR,  PERC,                   EXLM,  AMPR,  ASTR,  CIRC,     0,   DEL,\
+      XXXXX,     1,    AT,  HASH,   DLR,  PERC,                   EXLM,  AMPR,  ASTR,  CIRC,     0,   DEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
       XXXXX,    UP, XXXXX, TLCBR,  RCBR,   GRV,                   TEQL,  MINS,  LPRN,  RPRN,  PIPE, XXXXX,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
@@ -286,6 +286,15 @@ void matrix_scan_user(void) {
    LEADER_DICTIONARY() {
        leading = false;
 
+       SEQ_TWO_KEYS(KC_U, KC_U) {
+           // ユーザーネームのタイプ
+            SEND_STRING("morimoto_atsushi");
+       }
+       SEQ_TWO_KEYS(KC_U, KC_M) {
+           // ユーザーネームのタイプ
+            SEND_STRING("rollingteapot@gmail.com");
+       }
+
        SEQ_TWO_KEYS(KC_V, KC_R) {
            // VS: 実行
            register_code(KC_RCTRL);
@@ -310,6 +319,7 @@ void matrix_scan_user(void) {
            tap_key(KC_F7, false);
            unregister_code(KC_RCTRL);
        }
+
        leader_end();
    }
 }
@@ -346,12 +356,6 @@ void iota_gfx_task_user(void) {
 // _RAISE, _LOWER の同時押しで _ADJUST に切り替える
 uint32_t layer_state_set_user(uint32_t state) {
   return update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
-}
-
-static void type_username(bool pressed) {
-	if (pressed) {
-		SEND_STRING("morimoto_atsushi");
-	}
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -417,8 +421,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       #endif
       break;
 	case MTYUN:
-		type_username(record->event.pressed);
-		return false;
+      if (record->event.pressed) {
+          SEND_STRING("morimoto_atsushi");
+      }
+      return false;
 	  break;
   }
   return true;
