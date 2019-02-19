@@ -1,6 +1,11 @@
 /*
  * tap dance ref: keyboards/planck/keymaps/altgr/common/keycode_functions.h
  * tap dance ref: keyboards/bpiphany/frosty_flake/keymaps/nikchi/keymap.c
+ *
+ * TL() で PERMISSIVE_HOLD が効かない件
+ * http://okapies.hateblo.jp/entry/2019/02/02/133953
+ * https://gist.github.com/okapies/5d13a174cbb13ce34dbd9faede9d0b71#file-keymap-c-L99-L164
+ *
  */
 
 #include QMK_KEYBOARD_H
@@ -176,16 +181,18 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // for Mac
 #define KC_CMD KC_LGUI
 #define KC_OPTTB ALT_T(KC_TAB)
-#define KC_LOWEI LT(_LOWER, KC_LANG2)
-#define KC_RAIKN LT(_RAISE, KC_LANG1)
+/* #define KC_LOWEI LT(_LOWER, KC_LANG2) */
+/* #define KC_RAIKN LT(_RAISE, KC_LANG1) */
 #else
 // for Windows
 #define KC_CMD KC_LALT
 #define KC_OPTTB CTL_T(KC_TAB)
-#define KC_LOWEI LT(_LOWER, KC_MHEN)
-#define KC_RAIKN LT(_RAISE, KC_HENK)
+/* #define KC_LOWEI LT(_LOWER, KC_MHEN) */
+/* #define KC_RAIKN LT(_RAISE, KC_HENK) */
 #endif
 
+#define KC_LOWEI KC_LOWER
+#define KC_RAIKN KC_RAISE
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc( \
@@ -358,7 +365,14 @@ uint32_t layer_state_set_user(uint32_t state) {
   return update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
 }
 
+static bool lower_pressed = false;
+static bool raise_pressed = false;
+static uint16_t lower_pressed_time = 0;
+static uint16_t raise_pressed_time = 0;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  /* bool pressed = record->event.pressed; */
+
   if (record->event.pressed) {
 #ifdef SSD1306OLED
     set_keylog(keycode, record);
@@ -373,6 +387,51 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+
+#if 1
+    case LOWER:
+      if (record->event.pressed) {
+        lower_pressed = true;
+        lower_pressed_time = record->event.time;
+
+        layer_on(_LOWER);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+      } else {
+        layer_off(_LOWER);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+
+        if (lower_pressed && (TIMER_DIFF_16(record->event.time, lower_pressed_time) < TAPPING_TERM)) {
+          register_code(KC_LANG2); // for macOS
+          register_code(KC_MHEN);
+          unregister_code(KC_MHEN);
+          unregister_code(KC_LANG2);
+        }
+        lower_pressed = false;
+      }
+      return false;
+      break;
+    case RAISE:
+      if (record->event.pressed) {
+        raise_pressed = true;
+        raise_pressed_time = record->event.time;
+
+        layer_on(_RAISE);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+      } else {
+        layer_off(_RAISE);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+
+        if (raise_pressed && (TIMER_DIFF_16(record->event.time, raise_pressed_time) < TAPPING_TERM)) {
+          register_code(KC_LANG1); // for macOS
+          register_code(KC_HENK);
+          unregister_code(KC_HENK);
+          unregister_code(KC_LANG1);
+        }
+        raise_pressed = false;
+      }
+      return false;
+      break;
+#else
     case LOWER:
       if (record->event.pressed) {
         layer_on(_LOWER);
@@ -401,6 +460,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
         break;
+#endif
     case RGB_MOD:
       #ifdef RGBLIGHT_ENABLE
         if (record->event.pressed) {
@@ -426,6 +486,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
 	  break;
+
+    default:
+      if (record->event.pressed) {
+          lower_pressed = raise_pressed = false;
+      }
   }
   return true;
 }
