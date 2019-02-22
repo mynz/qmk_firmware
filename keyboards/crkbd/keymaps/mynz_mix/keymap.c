@@ -235,7 +235,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------.                ,-----------------------------------------.
         TAB, XXXXX, XXXXX, XXXXX, XXXXX,  VOLU,                  XXXXX,  PGDN,  PGUP,   INS,   APP,  LGUI,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      CTLES, XXXXX, XXXXX, XXXXX, XXXXX,  VOLD,                   LEFT,  DOWN,    UP, RIGHT, XXXXX, XXXXX,\
+      CTLES, XXXXX, XXXXX, XXXXX, XXXXX,  VOLD,                   LEFT,  DOWN,    UP, RIGHT, XXXXX,  PSCR,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT, XXXXX, XXXXX, XXXXX, XXXXX,  MUTE,                  XXXXX,  HOME,   END, XXXXX, XXXXX,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
@@ -292,6 +292,19 @@ void matrix_scan_user(void) {
 
    LEADER_DICTIONARY() {
        leading = false;
+
+       SEQ_TWO_KEYS(KC_S, KC_S) {
+           // 画面全体をスクリーンキャプチャ
+           tap_key(KC_PSCR, false);
+       }
+       SEQ_TWO_KEYS(KC_S, KC_W) {
+           // 最前面のウィンドウのみキャプチャ
+           tap_key(KC_PSCR, false); // FIXME
+       }
+       SEQ_TWO_KEYS(KC_S, KC_R) {
+           // 任意の矩形をスクリーンキャプチャ
+           tap_key(KC_PSCR, false); // FIXME
+       }
 
        SEQ_TWO_KEYS(KC_U, KC_U) {
            // ユーザーネームのタイプ
