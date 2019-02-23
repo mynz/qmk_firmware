@@ -54,6 +54,7 @@ enum TapDance {
 	TD_EQL,  // =
 	TD_LCBR, // {
 	TD_SCLN, // ;
+	TD_QUOT, // '
 };
 
 // helper
@@ -121,31 +122,43 @@ void td_eql_fn(qk_tap_dance_state_t *state, void *user_data) {
 	reset_tap_dance(state);
 }
 
-void td_scln_fn(qk_tap_dance_state_t *state, void *user_data) {
-    uint8_t shift = (get_mods() & MOD_MASK_SHIFT);
+static void _td_shifted(qk_tap_dance_state_t *state, void *user_data, uint16_t keycode) {
+    uint8_t shift = get_mods() & MOD_MASK_SHIFT;
     if (shift) {
-        // type `:`
+        // type regular keycode.
         // シフトキーが押されているときは擬似的にタップダンスを無効化する。
-        // この中で unregister_code(KC_LSFT) を呼び出すようなコードがあると物理的にシフトキーを押しても離した状態に遷移してしまう。
-        // その場合、再度物理的にシフトキーを押し直さないと有効にならないので（できる限り）そのような実装を含まないように気をつける。
-        // この箇所に関しては、シフトキーが押されていることが前提になっているので、 `KC_SCLN` を発行すれば `:` が出力される。
-        tap_key_ntimes(KC_SCLN, false, state->count);
+        // この中で unregister_code(KC_LSFT) を呼び出すようなコードがあると物理
+        // 的にシフトキーを押しても離した状態に遷移してしまう。その場合、再度物
+        // 理的にシフトキーを押し直さないと有効にならないので（できる限り）その
+        // ような実装を含まないように気をつける。
+        // この箇所に関しては、シフトキーが押されていることが前提になっているの
+        // で、 `KC_SCLN` を発行すれば`:` が出力される。
+        tap_key_ntimes(keycode, false, state->count);
     } else {
-        if (state->count >= 2 ) {
-            // type `:`
-            tap_key_ntimes(KC_SCLN, true, state->count-1);
+        if (state->count >= 2) {
+            // type regular keycode.
+            tap_key_ntimes(keycode, true, state->count-1);
         } else {
-            // type `;` as like a regular key.
-            tap_key(KC_SCLN, false);
+            // type shifted keycode.
+            tap_key(keycode, false);
         }
     }
     reset_tap_dance(state);
+}
+
+void td_scln_fn(qk_tap_dance_state_t *state, void *user_data) {
+	_td_shifted(state, user_data, KC_SCLN);
+}
+
+void td_quot_fn(qk_tap_dance_state_t *state, void *user_data) {
+	_td_shifted(state, user_data, KC_QUOT);
 }
 
 qk_tap_dance_action_t tap_dance_actions[] = {
 	[TD_EQL] = ACTION_TAP_DANCE_FN(td_eql_fn),
 	[TD_LCBR] = ACTION_TAP_DANCE_FN(td_brace_fn),
 	[TD_SCLN] = ACTION_TAP_DANCE_FN(td_scln_fn),
+	[TD_QUOT] = ACTION_TAP_DANCE_FN(td_quot_fn),
 };
 
 #define KC______ KC_TRNS
@@ -170,6 +183,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define KC_TEQL   TD(TD_EQL)   // '='
 #define KC_TLCBR  TD(TD_LCBR)  // '{'
 #define KC_TSCLN  TD(TD_SCLN)  // ':'
+#define KC_TQUOT  TD(TD_QUOT)  // '''
 
 // #define KC_GUIEI GUI_T(KC_LANG2)
 #define KC_ALTKN ALT_T(KC_LANG1)
@@ -199,7 +213,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------.                ,-----------------------------------------.
         TAB,     Q,     W,     E,     R,     T,                      Y,     U,     I,     O,     P,  LEAD,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      CTLES,     A,     S,     D,     F,     G,                      H,     J,     K,     L, TSCLN,  QUOT,\
+      CTLES,     A,     S,     D,     F,     G,                      H,     J,     K,     L, TSCLN, TQUOT,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT,     Z,     X,     C,     V,     B,                      N,     M,  COMM,   DOT,  SLSH,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
@@ -508,4 +522,4 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-/* vim: set sts=2: */
+/* vim: set sts=2 expandtab: */
