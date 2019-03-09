@@ -211,7 +211,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-        TAB,     Q,     W,     E,     R,     T,                      Y,     U,     I,     O,     P,  LEAD,\
+        TAB,     Q,     W,     E,     R,     T,                      Y,     U,     I,     O,     P,  MINS,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
       CTLES,     A,     S,     D,     F,     G,                      H,     J,     K,     L, TSCLN, TQUOT,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
@@ -223,11 +223,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-      XXXXX,     1,    AT,  HASH,   DLR,  PERC,                   EXLM,  AMPR,  ASTR,  CIRC,     0,   DEL,\
+       LSFT,     1,    AT,  TILD,   DLR,  CIRC,                   PIPE,  PLUS,  ASTR,  AMPR,     0,   DEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      CTLES,    UP, XXXXX, TLCBR,  RCBR,   GRV,                   TEQL,  MINS,  LPRN,  RPRN,  PIPE,  DQUO,\
+      CTLES,    UP,   GRV,  HASH,  PERC,  LBRC,                   RBRC,  MINS,  UNDS,  TEQL,  EXLM,  DQUO,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LEFT,  DOWN, RIGHT, XXXXX, XXXXX,  TILD,                   PLUS,  UNDS,  LBRC,  RBRC,  BSLS,  RSFT,\
+       LEFT,  DOWN, RIGHT, XXXXX,  LPRN, TLCBR,                   RCBR,  RPRN,    LT,    GT,  BSLS,   ENT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                     CMD, LOWEI,  BSPC,      SPC, RAIKN, OPTTB\
                               //`--------------------'  `--------------------'
