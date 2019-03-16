@@ -99,12 +99,12 @@ void tap_key_ntimes(uint16_t keycode, bool shift, uint8_t count) {
 }
 
 void td_brace_fn(qk_tap_dance_state_t *state, void *user_data) {
-	if (state->count >= 3 ) {
+	if (state->count >= 2 ) {
 		tap_key(KC_LBRC, true);
-		tap_key(KC_ENT, false);
 		tap_key(KC_ENT, false);
 		tap_key(KC_RBRC, true);
 		tap_key(KC_UP, false);
+		tap_key(KC_ENT, false);
 	} else {
 		tap_key_double_max(KC_LBRC, true, state->count);
 	}
