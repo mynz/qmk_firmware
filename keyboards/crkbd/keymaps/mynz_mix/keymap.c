@@ -190,6 +190,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 #define KC_CTLTB CTL_T(KC_TAB)
 #define KC_CTLES CTL_T(KC_ESC)
+#define KC_LSFTB SFT_T(KC_TAB)
 
 #if defined(FOR_MAC)
 // for Mac
@@ -215,7 +216,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
       CTLES,     A,     S,     D,     F,     G,                      H,     J,     K,     L, TSCLN, TQUOT,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LSFT,     Z,     X,     C,     V,     B,                      N,     M,  COMM,   DOT,  SLSH,  RSFT,\
+      LSFTB,     Z,     X,     C,     V,     B,                      N,     M,  COMM,   DOT,  SLSH,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                     CMD, LOWEI,   SPC,      ENT, RAIKN, OPTTB\
                               //`--------------------'  `--------------------'
@@ -223,11 +224,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-       LSFT,     1,    AT,  TILD,  PERC,  CIRC,                   PIPE,  PLUS,  ASTR,  AMPR,     0,   DEL,\
+        TAB,     1,    AT,  TILD,  PERC,  CIRC,                   PIPE,  PLUS,  ASTR,  AMPR,     0,   DEL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
       CTLES,    UP,   GRV,  LPRN,  HASH,  LBRC,                   RBRC,  MINS,  RPRN,  TEQL,  EXLM,  DQUO,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LEFT,  DOWN, RIGHT, XXXXX,   DLR, TLCBR,                   RCBR,  UNDS,    LT,    GT,  BSLS,   SPC,\
+      LSFTB,  DOWN, RIGHT, XXXXX,   DLR, TLCBR,                   RCBR,  UNDS,    LT,    GT,  BSLS,   SPC,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                     CMD, LOWEI,  BSPC,      ENT, RAIKN, OPTTB\
                               //`--------------------'  `--------------------'
@@ -239,7 +240,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
       CTLES,    F6,    F7,    F8,    F9,   F10,                   LEFT,  DOWN,    UP, RIGHT, XXXXX, XXXXX,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LSFT,    F1,    F2,    F3,    F4,    F5,                    F11,   F12,  COMM,   DOT, XXXXX,  RSFT,\
+      LSFTB,    F1,    F2,    F3,    F4,    F5,                    F11,   F12,  COMM,   DOT, XXXXX,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                     CMD, LOWEI,  BSPC,      DEL, RAIKN, OPTTB\
                               //`--------------------'  `--------------------'
