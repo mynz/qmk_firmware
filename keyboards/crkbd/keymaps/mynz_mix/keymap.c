@@ -185,7 +185,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define KC_TSCLN  TD(TD_SCLN)  // ':'
 #define KC_TQUOT  TD(TD_QUOT)  // '''
 
-// #define KC_GUIEI GUI_T(KC_LANG2)
 #define KC_ALTKN ALT_T(KC_LANG1)
 
 #define KC_CTLTB CTL_T(KC_TAB)
@@ -193,17 +192,14 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define KC_LSFTB SFT_T(KC_TAB)
 
 #if defined(FOR_MAC)
-// for Mac
+// for Mac OSX
 #define KC_CMD KC_LGUI
-#define KC_OPTTB ALT_T(KC_TAB)
-/* #define KC_LOWEI LT(_LOWER, KC_LANG2) */
-/* #define KC_RAIKN LT(_RAISE, KC_LANG1) */
+// #define KC_OPTTB ALT_T(KC_TAB)
+#define KC_OPTTB CTL_T(KC_TAB)
 #else
 // for Windows
 #define KC_CMD KC_LALT
 #define KC_OPTTB CTL_T(KC_TAB)
-/* #define KC_LOWEI LT(_LOWER, KC_MHEN) */
-/* #define KC_RAIKN LT(_RAISE, KC_HENK) */
 #endif
 
 #define KC_LOWEI KC_LOWER
