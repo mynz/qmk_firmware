@@ -51,10 +51,11 @@ enum macro_keycodes {
 };
 
 enum TapDance {
-	TD_EQL,  // =
-	TD_LCBR, // {
-	TD_SCLN, // ;
-	TD_QUOT, // '
+	TD_EQL,  // '='
+	TD_LCBR, // '{'
+	TD_SCLN, // ';'
+	TD_QUOT, // '''
+	TD_SLSH, // '/'
 };
 
 // helper
@@ -154,11 +155,16 @@ void td_quot_fn(qk_tap_dance_state_t *state, void *user_data) {
 	_td_shifted(state, user_data, KC_QUOT);
 }
 
+void td_slsh_fn(qk_tap_dance_state_t *state, void *user_data) {
+	_td_shifted(state, user_data, KC_SLSH);
+}
+
 qk_tap_dance_action_t tap_dance_actions[] = {
 	[TD_EQL] = ACTION_TAP_DANCE_FN(td_eql_fn),
 	[TD_LCBR] = ACTION_TAP_DANCE_FN(td_brace_fn),
 	[TD_SCLN] = ACTION_TAP_DANCE_FN(td_scln_fn),
 	[TD_QUOT] = ACTION_TAP_DANCE_FN(td_quot_fn),
+	[TD_SLSH] = ACTION_TAP_DANCE_FN(td_slsh_fn),
 };
 
 #define KC______ KC_TRNS
@@ -184,6 +190,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define KC_TLCBR  TD(TD_LCBR)  // '{'
 #define KC_TSCLN  TD(TD_SCLN)  // ':'
 #define KC_TQUOT  TD(TD_QUOT)  // '''
+#define KC_TSLSH  TD(TD_SLSH)  // '/'
 
 #define KC_ALTKN ALT_T(KC_LANG1)
 
@@ -212,7 +219,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
       CTLES,     A,     S,     D,     F,     G,                      H,     J,     K,     L, TSCLN, TQUOT,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      LSFTB,     Z,     X,     C,     V,     B,                      N,     M,  COMM,   DOT,  SLSH,  RSFT,\
+      LSFTB,     Z,     X,     C,     V,     B,                      N,     M,  COMM,   DOT, TSLSH,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                     CMD, LOWEI,   SPC,      ENT, RAIKN, OPTTB\
                               //`--------------------'  `--------------------'
